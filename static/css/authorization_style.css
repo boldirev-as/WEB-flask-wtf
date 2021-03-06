@@ -2,16 +2,20 @@ form.login_form {
     margin-left: auto;
     margin-right: auto;
     max-width: 450px;
-    border: 1px solid gray;
     border-radius: 5px;
     padding: 10px;
+}
+
+img {
+    float: left; /* Обтекание картинки по левому краю */
+    padding-left: 30px; /* Отступ слева */
+    padding-bottom: 10px; /* Отступ снизу */
 }
 
 h5 {
     margin-left: auto;
     margin-right: auto;
     max-width: 450px;
-    border: 1px solid gray;
     border-radius: 5px;
     padding: 10px;
 }

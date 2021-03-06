@@ -1,11 +1,11 @@
 from flask import render_template, Flask, url_for
 from flask_wtf import FlaskForm
 from werkzeug.utils import redirect
-from wtforms import StringField, BooleanField, SubmitField, PasswordField
+from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+app.config['SECRET_KEY'] = 'yandex_lyceum_secret_key'
 
 
 @app.route('/index/<title>')
@@ -37,7 +37,7 @@ def list_profs(type_prof):
 @app.route('/answer')
 def answer():
     person = {'surname': 'QW', 'name': 'bob', 'education': 'high',
-              'profession': 'inchener', 'sex': 'male', 'motivation': 'Want',
+              'profession': 'inhere', 'sex': 'male', 'motivation': 'Want',
               'ready': 'True'}
     return render_template("anwser.html", title="Анкета", person=person,
                            css=url_for('static', filename='css/anwser_style.css'))
@@ -57,7 +57,14 @@ def login():
     if form.validate_on_submit():
         return redirect('/login')
     return render_template('login.html', title='Авторизация', form=form,
-                           css=url_for('static', filename='css/authorization_style.css'))
+                           css=url_for('static', filename='css/authorization_style.css'),
+                           img=url_for('static', filename='img/icon.png'))
+
+
+@app.route('/distribution')
+def distribution():
+    user_list = ["Bob", "Gon", "Igor", "Milan", "Boris"]
+    return render_template('rooms_order.html', title='Расселение', user_list=user_list)
 
 
 if __name__ == '__main__':
