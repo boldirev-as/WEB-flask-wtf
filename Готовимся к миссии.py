@@ -1,4 +1,8 @@
 from flask import render_template, Flask, url_for
+from flask_wtf import FlaskForm
+from werkzeug.utils import redirect
+from wtforms import StringField, BooleanField, SubmitField, PasswordField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -37,6 +41,23 @@ def answer():
               'ready': 'True'}
     return render_template("anwser.html", title="Анкета", person=person,
                            css=url_for('static', filename='css/anwser_style.css'))
+
+
+class LoginForm(FlaskForm):
+    captain_username = StringField('Id капитана', validators=[DataRequired()])
+    captain_password = PasswordField('Пароль капитана', validators=[DataRequired()])
+    austronavt_username = StringField('Id астронавта', validators=[DataRequired()])
+    austronavt_password = PasswordField('Пароль астронавта', validators=[DataRequired()])
+    submit = SubmitField('Доступ')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect('/login')
+    return render_template('login.html', title='Авторизация', form=form,
+                           css=url_for('static', filename='css/authorization_style.css'))
 
 
 if __name__ == '__main__':
