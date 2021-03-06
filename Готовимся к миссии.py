@@ -29,5 +29,15 @@ def list_profs(type_prof):
     return render_template("list_prof.html", list_prof=list_prof, types=type_prof)
 
 
+@app.route('/auto_answer')
+@app.route('/answer')
+def answer():
+    person = {'surname': 'QW', 'name': 'bob', 'education': 'high',
+              'profession': 'inchener', 'sex': 'male', 'motivation': 'Want',
+              'ready': 'True'}
+    return render_template("anwser.html", title="Анкета", person=person,
+                           css=url_for('static', filename='css/anwser_style.css'))
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
