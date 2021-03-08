@@ -67,5 +67,23 @@ def distribution():
     return render_template('rooms_order.html', title='Расселение', user_list=user_list)
 
 
+@app.route('/table/<sex>/<int:year>')
+def table(sex, year):
+    if sex == "male":
+        img = "blue"
+    else:
+        img = "red"
+    if int(year) <= 21:
+        img2 = "male.png"
+        img += "dark.png"
+    else:
+        img += ".png"
+        img2 = "female.png"
+
+    return render_template('style_room.html', title='Дизайн', css=url_for("static", filename="css/style_room.css"),
+                           img=url_for("static", filename=f"img/{img}"),
+                           img2=url_for("static", filename=f"img/{img2}"))
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
