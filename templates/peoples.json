@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Gjon",
+    "surname": "Alekseev",
+    "photo": "img/gjon.png",
+    "professions": "injener, dogger, police man"
+  },
+  {
+    "name": "Aleksandr",
+    "surname": "Morgan",
+    "photo": "img/aleksandr.png",
+    "professions": "injener1, dogger1, police man1"
+  },
+  {
+    "name": "Ghon",
+    "surname": "Belov",
+    "photo": "img/ghon.png",
+    "professions": "injener2, dogger2, police man2"
+  }
+]

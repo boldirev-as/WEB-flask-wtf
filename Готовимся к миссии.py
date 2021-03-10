@@ -1,4 +1,7 @@
-from flask import render_template, Flask, url_for
+import json
+import os
+
+from flask import render_template, Flask, url_for, request
 from flask_wtf import FlaskForm
 from werkzeug.utils import redirect
 from wtforms import StringField, SubmitField, PasswordField
@@ -33,6 +36,7 @@ def list_profs(type_prof):
     return render_template("list_prof.html", list_prof=list_prof, types=type_prof)
 
 
+@app.route('/')
 @app.route('/auto_answer')
 @app.route('/answer')
 def answer():
@@ -83,6 +87,25 @@ def table(sex, year):
     return render_template('style_room.html', title='Дизайн', css=url_for("static", filename="css/style_room.css"),
                            img=url_for("static", filename=f"img/{img}"),
                            img2=url_for("static", filename=f"img/{img2}"))
+
+
+@app.route('/galery', methods=['POST', 'GET'])
+def galery():
+    if request.method == 'POST':
+        f = request.files['file']
+        f.save(f"static/img/cash/{len(os.listdir('static/img/cash'))}.png")
+    print([url_for("static", filename=f"img/cash/{file}")
+                                 for file in os.listdir('static/img/cash')])
+    return render_template('carousel.html', title='Дизайн',
+                           imgs=[url_for("static", filename=f"img/cash/{file}")
+                                 for file in os.listdir('static/img/cash')])
+
+
+@app.route('/memory')
+def memory():
+    with open("templates/peoples.json", mode="r") as json_file:
+        data = json.load(json_file)
+    return render_template('memory.html', title='Анкета', data=data)
 
 
 if __name__ == '__main__':
